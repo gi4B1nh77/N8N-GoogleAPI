@@ -1,6 +1,6 @@
 # N8N-GoogleAPI
 
-## Creat key service account
+### 1.Creat key service account
 
 ![image](https://github.com/user-attachments/assets/77fd1ba5-935b-469e-b753-77623264c545)
 
@@ -8,8 +8,33 @@ Access this page, then create new service account, next we navigate to key and g
 
 ![image](https://github.com/user-attachments/assets/c2628dd8-bcbb-4fc0-9227-7721705abf0b)
 
+### 2. Prepare python env
 
-## Create 'update_google_sheet.py':
+- Access bash on n8n container:
+~~~bash
+docker exec -it --user root n8n /bin/sh
+~~~
+
+- Install python and dependencies:
+~~~bash
+apk add --no-cache python3 py3-pip
+python3 --version
+pip3 --version
+~~~
+
+- Create env in Python:
+~~~bash
+ python3 -m venv /app/venv
+. /app/venv/bin/activate
+~~~
+
+- Install GoogleAPI
+~~~bash
+pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+python -c "import google.oauth2.service_account; print('Google module is installed')"
+~~~
+
+### 3. Create 'update_google_sheet.py':
 
 - The Sheet ID is the string between /d/ and /edit/, copy it
 - The service account is the json you download before 
