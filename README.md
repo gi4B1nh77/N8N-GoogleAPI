@@ -61,7 +61,7 @@ creds = Credentials.from_service_account_file(service_account_key_path, scopes=[
 service = build("sheets", "v4", credentials=creds)
 
 # Google Sheets Details
-spreadsheet_id = "1socVXNSb2K8Ik3Au3OuDDOafYMGh2GTOpNg2kMLRPSU"
+spreadsheet_id = "**********************************"
 sheet_name = "Management"
 
 # Ensure input_data is a list
