@@ -86,6 +86,8 @@ print(json.dumps({"success": True, "message": "Data updated successfully"}))
 
 ### Exec node
 ![image](https://github.com/user-attachments/assets/57dcdb85-e90f-4d41-b4ff-d23c22ac2d76)
+
+- The command bellow executes in an env venv then uses the path/to/file.py
 ~~~bash
 python3 -m venv /app/venv
 . /app/venv/bin/activate
