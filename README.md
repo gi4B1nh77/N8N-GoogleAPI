@@ -36,7 +36,7 @@ pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-pyt
 python -c "import google.oauth2.service_account; print('Google module is installed')"
 ~~~
 
-### 3. Create 'update_google_sheet.py':
+### 3. Create `update_google_sheet.py`:
 
 - The Sheet ID is the string between /d/ and /edit/, copy it
 - The service account is the json you download before 
