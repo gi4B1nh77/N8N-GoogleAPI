@@ -1,12 +1,14 @@
 # N8N-GoogleAPI
 
-### 1.Creat key service account
+### 1.Creat key service account and connect to Google Service
 
 ![image](https://github.com/user-attachments/assets/77fd1ba5-935b-469e-b753-77623264c545)
 
-Access this page, then create new service account, next we navigate to key and get the new one. After that we will download a file that contain policy
+- Access this page, then create new service account, next we navigate to key and get the new one. After that we will download a file that contain policy
 
 ![image](https://github.com/user-attachments/assets/c2628dd8-bcbb-4fc0-9227-7721705abf0b)
+
+- Next, go to Google Sheet and share with the email of the service account
 
 ### 2. Prepare python env
 
