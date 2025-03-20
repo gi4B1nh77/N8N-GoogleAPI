@@ -47,7 +47,11 @@ from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
 # Load JSON input from stdin
-input_data = json.load(sys.stdin)
+try:
+    input_data = json.loads(sys.stdin.read())  # Ensure JSON is correctly loaded
+except json.JSONDecodeError as e:
+    print(json.dumps({"success": False, "error": f"Invalid JSON input: {str(e)}"}))
+    sys.exit(1)
 
 # Google Service Account Key (You can load it from a file instead)
 service_account_key_path = "/home/peter/service_account.json"
@@ -57,22 +61,34 @@ creds = Credentials.from_service_account_file(service_account_key_path, scopes=[
 service = build("sheets", "v4", credentials=creds)
 
 # Google Sheets Details
-spreadsheet_id = ""
-sheet_name = ""
+spreadsheet_id = "1socVXNSb2K8Ik3Au3OuDDOafYMGh2GTOpNg2kMLRPSU"
+sheet_name = "Management"
+
+# Ensure input_data is a list
+if not isinstance(input_data, list):
+    input_data = [input_data]  # Wrap in a list if it's a single dictionary
 
 # Extract values to update
-values = [[entry["Money_In"], entry["Date"], entry["Month"], entry["Total_Monthly"]] for entry in input_data]
+values = [[entry["Date"], entry["Month"], entry["Money_In"]] for entry in input_data]
 body = {"values": values}
 
 # Append data to Google Sheets
 service.spreadsheets().values().append(
     spreadsheetId=spreadsheet_id,
-    range=f"{sheet_name}!A:D",
+    range=f"{sheet_name}!A:C",
     valueInputOption="USER_ENTERED",
     insertDataOption="INSERT_ROWS",
     body=body
 ).execute()
 
 print(json.dumps({"success": True, "message": "Data updated successfully"}))
+~~~~
+
+### Exec node
+![image](https://github.com/user-attachments/assets/57dcdb85-e90f-4d41-b4ff-d23c22ac2d76)
+~~~bash
+python3 -m venv /app/venv
+. /app/venv/bin/activate
+echo '[{"Date": "{{ $json.message.formatted_date }}", "Month": "{{ $json.message.month }}", "Money_In": {{ $json.message.text }}}]' | /app/venv/bin/python /home/node/update_google_sheet.py
 ~~~~
 
